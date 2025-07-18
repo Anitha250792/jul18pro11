@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block title %}Question {{ qid }} - Quiz Preview{% endblock %}
+
+{% block head %}
+<style>
+  .question-text {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+  }
+  .options {
+    list-style-type: none;
+    padding-left: 0;
+  }
+  .options li {
+    margin: 0.6rem 0;
+  }
+  .option-label {
+    display: block;
+    background: #e9ecef;
+    padding: 0.7rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border: 2px solid transparent;
+  }
+  .option-label:hover {
+    background-color: #d1d9ff;
+  }
+  input[type="radio"] {
+    display: none;
+  }
+  input[type="radio"]:checked + .option-label {
+    background-color: #4a66ff;
+    color: white;
+    border-color: #324ec9;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+  <div class="question-text">{{ question.question }}</div>
+  <ul class="options">
+    {% for option in question.options %}
+      <li>
+        <input type="radio" id="opt{{ loop.index }}" name="answer" />
+        <label class="option-label" for="opt{{ loop.index }}">{{ option }}</label>
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}
